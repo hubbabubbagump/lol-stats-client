@@ -5,6 +5,8 @@ import items from './lol_data/item.json';
 import champions from './lol_data/champion.json';
 import './App.css';
 
+const SERVER_NAME = 'https://league-stats-battlefy.herokuapp.com';
+
 class App extends Component {
    constructor() {
       super();
@@ -20,7 +22,7 @@ class App extends Component {
    handleKeyPress = (event) => {
       if (event.key === 'Enter') {
          this.setState({ error: false, loading: true, summonerMatchData: [] });
-         fetch('/summoner?name=' + this.state.summonerName)
+         fetch(SERVER_NAME + '/summoner?name=' + this.state.summonerName)
             .then(response => response.json())
             .then(data => this.setState({ summonerMatchData: data, loading: false }))
             .catch(error => {
@@ -98,7 +100,7 @@ class App extends Component {
          for (let j = 0; j < 7; j++) {
             itemList.push(this.findItem(match['item' + j]));
          }
-         itemList = itemList.filter(Boolean).map(item => <img className='sprite' key={item.image.full} src={'/img/item/' + item.image.full} />);
+         itemList = itemList.filter(Boolean).map(item => <img className='sprite' key={item.image.full} src={SERVER_NAME + '/img/item/' + item.image.full} />);
          console.log(champion);
          matches.push(
             <div key={match.gameId} className={match.win ? "match victory" : "match defeat"}>
@@ -107,17 +109,17 @@ class App extends Component {
                   <p className='gameTimer'>{timer}</p>
                </div>
                <div className='champion container'>
-                  <img src={'/img/champion/' + champion.image.full} className='championSprite' />
+                  <img src={SERVER_NAME + '/img/champion/' + champion.image.full} className='championSprite' />
                   <p className='centerText'>{champion.name}</p>
                </div>
                <div className='spells container'>
                   <div className='spells'>
-                     <img src={'/img/spell/' + spellList[0].image.full} className='sprite'/>
-                     <img src={'/img/spell/' + spellList[1].image.full} className='sprite'/>
+                     <img src={SERVER_NAME + '/img/spell/' + spellList[0].image.full} className='sprite'/>
+                     <img src={SERVER_NAME + '/img/spell/' + spellList[1].image.full} className='sprite'/>
                   </div>
                   <div className='runes'>
-                     <img src={'/img/' + runeList[0].icon} className='sprite'/>
-                     <img src={'/img/' + runeList[1].icon} className='sprite'/>
+                     <img src={SERVER_NAME + '/img/' + runeList[0].icon} className='sprite'/>
+                     <img src={SERVER_NAME + '/img/' + runeList[1].icon} className='sprite'/>
                   </div>
                </div>
                <div className='performance container'>
