@@ -1,4 +1,4 @@
-#League of legends stat tracker application
+# League of legends stat tracker application
 
 ![preview](lol-stats.png)
 
